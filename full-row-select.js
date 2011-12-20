@@ -61,27 +61,28 @@
  */
 (function($){
   $.fn.fullRowSelect = function(){
-    var element = this;
+    var element = $(this);
     /* Start by adding .collapsed to every odd numbered row */
-    $(element).find("tr:odd").addClass("collapsed");
+    element.find("tr:odd").addClass("collapsed");
     /*
      * Next, hide each of the row elements in the table
      * which do not have the .collapsed class
      */
-    $(element).find("tr:not(.collapsed)").hide();
+    element.find("tr:not(.collapsed)").hide();
     /* We don't want the header row hidden */
-    $(element).find("tr:first-child").show();
+    element.find("tr:first-child").show();
     /* Add a click event for the collapsed rows */
-    $(element).find("tr.collapsed").click(function() {
+    element.find("tr.collapsed").click(function() {
+      var row = $(this)
       /*
        * Toggle the uncollapsed class.
        * This is useful for styling the rows.  For example, we could
        * style the background of .collapsed to have an upward pointing arrow
        * and the .uncollapsed elements to have a downward arrow.
        */
-      $(this).toggleClass("uncollapsed");
+      row.toggleClass("uncollapsed");
       /* Hide/unhide the next row */
-      $(this).next("tr").toggle();
+      row.next("tr").toggle();
     });
   }
 })(jQuery);
